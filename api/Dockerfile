@@ -7,4 +7,4 @@ COPY . ./
 RUN pip install fastapi
 RUN pip install gunicorn 
 RUN pip install uvicorn 
-CMD exec gunicorn --bind :$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker  --threads 8 main.app:app
+CMD exec gunicorn --bind :$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker  --threads 8 main:app
