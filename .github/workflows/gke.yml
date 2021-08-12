@@ -21,7 +21,7 @@ on:
     - main
 
 env:
-  PROJECT_ID: directed-asset-312701
+  PROJECT_ID: lateral-vision-320622
   IMAGESER: fastimage
   SERVICEDEV: fastdev
   REGION: us-central1
@@ -39,7 +39,7 @@ jobs:
     - uses: google-github-actions/setup-gcloud@master
       with:
         version: '290.0.1'
-        project_id: directed-asset-312701
+        project_id: ${{ PROJECT_ID}}
         service_account_key: ${{ secrets.GCP_KEY }}
         export_default_credentials: true
     
