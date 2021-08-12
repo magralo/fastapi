@@ -39,7 +39,7 @@ jobs:
     - uses: google-github-actions/setup-gcloud@master
       with:
         version: '290.0.1'
-        project_id: $PROJECT_ID
+        project_id: lateral-vision-320622
         service_account_key: ${{ secrets.GCP_KEY }}
         export_default_credentials: true
     
