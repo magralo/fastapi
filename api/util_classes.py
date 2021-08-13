@@ -5,8 +5,6 @@ import transformers
 import spacy 
 import json
 
-
-
 class SentModel():
     def __init__(self,tokenizer,model,nlp):
         self.model = model
@@ -23,12 +21,13 @@ class SentModel():
         doc = self.nlp(text, disable=["ner"])
         deliver = []
         roots = [token  for token in doc if token.dep_ == "ROOT" ]
-        deliver = dict({'Asset Class':[],'Text':[],'doc_type':[],'Pos':[],'Neg':[],'Neutral':[]})
+        deliver = dict({'AssetClass':[],'Text':[],'doc_type':[],'Pos':[],'Neg':[],'Neutral':[]})
         for root in roots:
             token_list = [e.i for e in root.subtree]
             token_list = list(dict.fromkeys(token_list))
             token_list.sort()
             text = ' '.join([doc[i].text for i in token_list ])
+            
             mini_doc = self.nlp(text, disable=["ner"])
             doc_type = 0 # This means no identified asset class
             n_assets = len (mini_doc.ents)
@@ -37,25 +36,34 @@ class SentModel():
 
                 sentiment = self.get_sent1(text)
                 doc_type = 1 # Talking about two asset classes.
-                deliver['Asset Class'].append([ent.text for ent in mini_doc.ents])
+                deliver['AssetClass'].append(mini_doc.ents[0].text)
                 deliver['Text'].append(mini_doc.text)
                 deliver['doc_type'].append("1")
                 deliver['Pos'].append(str(sentiment[0]))
                 deliver['Neg'].append(str(sentiment[1]))
                 deliver['Neutral'].append(str(sentiment[2]))
                 
-            elif (n_assets > 1):
-                sentiment = self.get_sent1(text)
-                doc_type = 2 # Talking about two asset classes.
-                deliver['Asset Class'].append([ent.text for ent in mini_doc.ents])
+            elif n_assets == 0:
+                
+                deliver['AssetClass'].append("None")
                 deliver['Text'].append(mini_doc.text)
-                deliver['doc_type'].append("2")
-                deliver['Pos'].append(str(sentiment[0]))
-                deliver['Neg'].append(str(sentiment[1]))
-                deliver['Neutral'].append(str(sentiment[2]))
+                deliver['doc_type'].append("0")
+                deliver['Pos'].append("0")
+                deliver['Neg'].append("0")
+                deliver['Neutral'].append("0")
+            elif n_assets > 1:
+                sentiment = self.get_sent1(text)
+                doc_type = 2 # Talking about two or more asset classes.          
+                for ent in mini_doc.ents:
+
+                    deliver['AssetClass'].append(ent.text)
+                    deliver['Text'].append(mini_doc.text)
+                    deliver['doc_type'].append("2")
+                    deliver['Pos'].append(str(sentiment[0]))
+                    deliver['Neg'].append(str(sentiment[1]))
+                    deliver['Neutral'].append(str(sentiment[2]))
 
                
         return json.dumps(deliver) 
-
-
+        #return deliver
 
