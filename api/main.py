@@ -87,7 +87,7 @@ async def hello_world():
 
 @app.post("/analize/")
 async def sentiments(text):
-    return model.get_sents(text).to_json(default_handler=str,orient="index")
+    return model.get_sents(text)
 
 
 

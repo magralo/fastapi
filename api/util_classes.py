@@ -3,7 +3,6 @@ import torch
 import pandas as pd
 import transformers
 import spacy 
-
 class SentModel():
     def __init__(self,tokenizer,model,nlp):
         self.model = model
@@ -20,7 +19,7 @@ class SentModel():
         doc = self.nlp(text, disable=["ner"])
         deliver = []
         roots = [token  for token in doc if token.dep_ == "ROOT" ]
-        deliver = []
+        deliver = dict({'Asset Class':[],'Text':[],'doc_type':[],'Pos':[],'Neg':[],'Neutral':[]})
         for root in roots:
             token_list = [e.i for e in root.subtree]
             token_list = list(dict.fromkeys(token_list))
@@ -31,16 +30,24 @@ class SentModel():
             n_assets = len (mini_doc.ents)
             sentiment = np.array([0,0,0])
             if n_assets == 1:
-                doc_type = 1 # This means absolute statement.
-                sentiment = self.get_sent1(text)
-            elif (n_assets > 1):
-                doc_type = 2 # Talking about two asset classes.
 
-            new = [mini_doc.ents,mini_doc.text,doc_type,sentiment[0],sentiment[1],sentiment[2]]
-            deliver.append(new)
-            
-        deliver = pd.DataFrame(deliver)
-        
-        deliver.columns = ['Asset Class','Text','doc_type','Pos','Neg','Neutral']
-            
+                sentiment = self.get_sent1(text)
+                deliver['Asset Class'].append(mini_doc.ents)
+                deliver['Text'].append(mini_doc.text)
+                deliver['doc_type'].append(1)
+                deliver['Pos'].append(sentiment[0])
+                deliver['Neg'].append(sentiment[1])
+                deliver['Neutral'].append(sentiment[2])
+                
+            elif (n_assets > 1):
+                sentiment = self.get_sent1(text)
+                doc_type = 2 # Talking about two asset classes.
+                deliver['Asset Class'].append(mini_doc.ents)
+                deliver['Text'].append(mini_doc.text)
+                deliver['doc_type'].append(2)
+                deliver['Pos'].append(sentiment[0])
+                deliver['Neg'].append(sentiment[1])
+                deliver['Neutral'].append(sentiment[2])
+
+               
         return deliver
