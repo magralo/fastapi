@@ -70,7 +70,7 @@ jobs:
           --platform managed \
           --allow-unauthenticated \
           --memory 2500Mi \
-          --memory 3Gi \
+          --memory 4Gi \
           --cpu 2
 
     - name: Deploy to Cloud Run on development 
@@ -81,6 +81,6 @@ jobs:
           --image gcr.io/$PROJECT_ID/$IMAGESER:${GITHUB_REF##*/} \
           --platform managed \
           --allow-unauthenticated \
-          --memory 3Gi \
+          --memory 4Gi \
           --cpu 2
           
