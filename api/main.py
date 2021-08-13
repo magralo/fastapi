@@ -4,6 +4,9 @@ from fastapi import FastAPI, Form
 
 from google.cloud import storage
 
+
+
+
 proj_id = "lateral-vision-320622"
 
 bucket_name = "transmodel_example"
@@ -17,8 +20,14 @@ blob.download_to_filename('modelx.pkl')
 ###Import model
 import pickle
 from util_classes import *
+import pathlib
+
+temp = pathlib.PosixPath
+pathlib.PosixPath = pathlib.WindowsPath
+
 pickle_in = open("modelx.pkl","rb")
 loaded_model =    pickle.load(pickle_in)
+pathlib.PosixPath = temp 
 ###
 app = FastAPI()
 
