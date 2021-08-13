@@ -14,6 +14,7 @@ RUN pip install pandas
 RUN pip install numpy
 RUN pip install pathlib
 RUN pip install --upgrade google-cloud-storage
+RUN python -m spacy download en_core_web_lg
 
 
 CMD exec gunicorn --bind :$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker  --threads 8 main:app --timeout 240
