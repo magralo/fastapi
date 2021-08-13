@@ -79,5 +79,6 @@ jobs:
           --image gcr.io/$PROJECT_ID/$IMAGESER:${GITHUB_REF##*/} \
           --platform managed \
           --allow-unauthenticated \
-          --memory 2500Mi
+          --memory 4000Mi
+          --cpu 2
           
