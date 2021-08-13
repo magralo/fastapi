@@ -69,7 +69,9 @@ jobs:
           --image gcr.io/$PROJECT_ID/$IMAGESER:${GITHUB_REF##*/} \
           --platform managed \
           --allow-unauthenticated \
-          --memory 2500Mi
+          --memory 2500Mi \
+          --memory 3Gi \
+          --cpu 2
 
     - name: Deploy to Cloud Run on development 
       if: ${{ github.ref != 'refs/heads/main'}}

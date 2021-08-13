@@ -22,12 +22,12 @@ import pickle
 from util_classes import *
 import pathlib
 
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
+temp =   pathlib.WindowsPath
+pathlib.WindowsPath = pathlib.PosixPath
 
 pickle_in = open("modelx.pkl","rb")
 loaded_model =    pickle.load(pickle_in)
-pathlib.PosixPath = temp 
+pathlib.WindowsPath = temp 
 ###
 app = FastAPI()
 
