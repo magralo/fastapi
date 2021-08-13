@@ -73,7 +73,7 @@ ruler.add_patterns(patterns)
     
     
     
-final = SentModel(tokenizer=tokenizer,model = model,nlp =nlp)
+model = SentModel(tokenizer=tokenizer,model = model,nlp =nlp)
 
 
 
@@ -95,4 +95,4 @@ async def sentiments(text):
 ## deploy local uvicorn main:app --reload 
 
 #curl -X GET -d '{"text": "hello word"}' -H "Content-type: application/json" http://127.0.0.1:8000/analize
-# curl -X GET http://127.0.0.1:8000/analize/?text=i%20like%20emerging%20markets
+# curl -X POST https://fastdev-y5z2fvs4lq-uc.a.run.app/analize/analize/?text=I%20like%20emerging%20markets%20for%20the%20next%20quarter.%20I%20do%20not%20like%20US%20equity,%20the%20had%20an%20awfull%20result
