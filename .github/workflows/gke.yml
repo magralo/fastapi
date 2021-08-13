@@ -69,9 +69,8 @@ jobs:
           --image gcr.io/$PROJECT_ID/$IMAGESER:${GITHUB_REF##*/} \
           --platform managed \
           --allow-unauthenticated \
-          --memory 2500Mi \
-          --memory 4Gi \
-          --cpu 2
+          --memory 8Gi \
+          --cpu 4
 
     - name: Deploy to Cloud Run on development 
       if: ${{ github.ref != 'refs/heads/main'}}
@@ -81,6 +80,6 @@ jobs:
           --image gcr.io/$PROJECT_ID/$IMAGESER:${GITHUB_REF##*/} \
           --platform managed \
           --allow-unauthenticated \
-          --memory 4Gi \
-          --cpu 2
+          --memory 8Gi \
+          --cpu 4
           
