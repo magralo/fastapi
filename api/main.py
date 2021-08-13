@@ -7,14 +7,14 @@ from google.cloud import storage
 
 
 
-proj_id = "lateral-vision-320622"
+#proj_id = "lateral-vision-320622"
 
-bucket_name = "transmodel_example"
+#bucket_name = "transmodel_example"
 
-storage_client = storage.Client(proj_id)
-bucket = storage_client.get_bucket(bucket_name)
-blob = bucket.blob('modelx.pkl')
-blob.download_to_filename('modelx.pkl')
+#storage_client = storage.Client(proj_id)
+#bucket = storage_client.get_bucket(bucket_name)
+#blob = bucket.blob('modelx.pkl')
+#blob.download_to_filename('modelx.pkl')
 
 
 ###Import model
@@ -87,7 +87,7 @@ async def hello_world():
 
 @app.post("/analize/")
 async def sentiments(text):
-    return loaded_model.get_sents(text).to_json(default_handler=str,orient="index")
+    return model.get_sents(text).to_json(default_handler=str,orient="index")
 
 
 
