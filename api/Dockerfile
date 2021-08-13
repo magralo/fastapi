@@ -12,6 +12,7 @@ RUN pip install spacy
 RUN pip install transformers
 RUN pip install pandas
 RUN pip install numpy
+RUN pip install pathlib
 RUN pip install --upgrade google-cloud-storage
 
 
