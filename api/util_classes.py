@@ -3,6 +3,10 @@ import torch
 import pandas as pd
 import transformers
 import spacy 
+import json
+
+
+
 class SentModel():
     def __init__(self,tokenizer,model,nlp):
         self.model = model
@@ -32,22 +36,26 @@ class SentModel():
             if n_assets == 1:
 
                 sentiment = self.get_sent1(text)
-                deliver['Asset Class'].append(mini_doc.ents)
+                doc_type = 1 # Talking about two asset classes.
+                deliver['Asset Class'].append([ent.text for ent in mini_doc.ents])
                 deliver['Text'].append(mini_doc.text)
-                deliver['doc_type'].append(1)
-                deliver['Pos'].append(sentiment[0])
-                deliver['Neg'].append(sentiment[1])
-                deliver['Neutral'].append(sentiment[2])
+                deliver['doc_type'].append("1")
+                deliver['Pos'].append(str(sentiment[0]))
+                deliver['Neg'].append(str(sentiment[1]))
+                deliver['Neutral'].append(str(sentiment[2]))
                 
             elif (n_assets > 1):
                 sentiment = self.get_sent1(text)
                 doc_type = 2 # Talking about two asset classes.
-                deliver['Asset Class'].append(mini_doc.ents)
+                deliver['Asset Class'].append([ent.text for ent in mini_doc.ents])
                 deliver['Text'].append(mini_doc.text)
-                deliver['doc_type'].append(2)
-                deliver['Pos'].append(sentiment[0])
-                deliver['Neg'].append(sentiment[1])
-                deliver['Neutral'].append(sentiment[2])
+                deliver['doc_type'].append("2")
+                deliver['Pos'].append(str(sentiment[0]))
+                deliver['Neg'].append(str(sentiment[1]))
+                deliver['Neutral'].append(str(sentiment[2]))
 
                
-        return deliver
+        return json.dumps(deliver) 
+
+
+
