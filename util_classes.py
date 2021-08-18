@@ -36,7 +36,7 @@ class SentModel():
 
                 sentiment = self.get_sent1(text)
                 doc_type = 1 # Talking about two asset classes.
-                deliver['AssetClass'].append(mini_doc.ents[0].text)
+                deliver['AssetClass'].append(mini_doc.ents[0].ent_id_)
                 deliver['Text'].append(mini_doc.text)
                 deliver['doc_type'].append("1")
                 deliver['Pos'].append(str(sentiment[0]))
@@ -56,7 +56,7 @@ class SentModel():
                 doc_type = 2 # Talking about two or more asset classes.          
                 for ent in mini_doc.ents:
 
-                    deliver['AssetClass'].append(ent.text)
+                    deliver['AssetClass'].append(ent.ent_id_)
                     deliver['Text'].append(mini_doc.text)
                     deliver['doc_type'].append("2")
                     deliver['Pos'].append(str(sentiment[0]))
