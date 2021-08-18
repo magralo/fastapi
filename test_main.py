@@ -43,3 +43,6 @@ def test_checkDouble():
     assert response.status_code == 200
     assert resp["doc_type"] == ['2','2'] 
     assert len(resp["AssetClass"]) == 2 
+    assert resp["AssetClass"] == ['us-equity', 'emer-equity']
+
+    
