@@ -42,4 +42,4 @@ def test_checkDouble():
     resp = json.loads(response.json())
     assert response.status_code == 200
     assert resp["doc_type"] == ['2','2'] 
-    assert resp["AssetClass"] == ['US Equity','emerging markets'] 
+    assert len(resp["AssetClass"]) == 2 
