@@ -11,9 +11,35 @@ def test_readyness():
     assert response.status_code == 200
     assert response.json() == {'hello':'worldhgjnsa'}
 
+
 def test_noAC():
     data = {"text":"Hola Mundo"}
     response = client.post("/analize/",params = data)
     resp = json.loads(response.json())
     assert response.status_code == 200
     assert resp["AssetClass"] == ["None"]
+
+
+def test_checkPos():
+    data = {"text":"Positive results for US equity"}
+    response = client.post("/analize/",params = data)
+    resp = json.loads(response.json())
+    assert response.status_code == 200
+    assert resp["Pos"] > resp["Neg"] 
+
+
+def test_checkNeg():
+    data = {"text":"Negative results for US equity"}
+    response = client.post("/analize/",params = data)
+    resp = json.loads(response.json())
+    assert response.status_code == 200
+    assert resp["Neg"] > resp["Pos"] 
+
+
+def test_checkDouble():
+    data = {"text":"Negative results for US equity and Emerging Markets"}
+    response = client.post("/analize/",params = data)
+    resp = json.loads(response.json())
+    assert response.status_code == 200
+    assert resp["doc_type"] == ['2','2'] 
+    assert resp["AssetClass"] == ['US Equity','emerging markets'] 
