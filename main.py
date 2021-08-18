@@ -1,37 +1,7 @@
-from fastapi import FastAPI, Form
-
-### Download model
-
-from google.cloud import storage
-
-
-
-
-#proj_id = "lateral-vision-320622"
-
-#bucket_name = "transmodel_example"
-
-#storage_client = storage.Client(proj_id)
-#bucket = storage_client.get_bucket(bucket_name)
-#blob = bucket.blob('modelx.pkl')
-#blob.download_to_filename('modelx.pkl')
-
-
-###Import model
-#import pickle
+from fastapi import FastAPI
 from util_classes import *
-#import pathlib
-
-#temp =   pathlib.WindowsPath
-#pathlib.WindowsPath = pathlib.PosixPath
-
-#pickle_in = open("modelx.pkl","rb")
-#loaded_model =    pickle.load(pickle_in)
-#pathlib.WindowsPath = temp 
-
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-import pandas as pd
-import torch 
+
 
 checkpoint = "ProsusAI/finbert"
 
