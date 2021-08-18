@@ -4,10 +4,10 @@ FROM python:3.8
 ENV APP_HOME /app
 WORKDIR $APP_HOME
 COPY . ./
-RUN pip install fastapi
-RUN pip install gunicorn 
-RUN pip install uvicorn 
 RUN pip install -r requirements.txt
+# Requiered for server
+RUN pip install gunicorn  
+RUN pip install uvicorn 
 RUN python -m spacy download en_core_web_lg
 
 
