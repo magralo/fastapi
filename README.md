@@ -14,6 +14,30 @@ In financial reading there 3 kind of statements:
 
 We have to be really careful about the relative statements, that is why we only trust in the absolute statements. The API returns a JSON where you have the variable "doc_type", since we do not have a model to identify relative statments we created a doc_type=2 which refers to a sentence with more than 2 identified asset classes.
 
+## API in action
+
+```python
+#Python Example
+import requests
+import json
+
+
+data = {'text':'To sum up this is a bad scenario for equity as a whole'}
+
+url =  'https://fast-y5z2fvs4lq-uc.a.run.app/analize/'
+
+response = requests.request('POST',url,params=data, headers = {'content-type': 'application/json'})
+
+response_dict = json.loads(response.text)
+```
+
+```console
+curl -X post https://fast-y5z2fvs4lq-uc.a.run.app/analize/?text=To%20sum%20up%20this%20is%20a%20bad%20scenario%20for%20equity%20as%20a%20whole
+```
+
+
+
+
 ## How do we split a text into sentences?
 
 Here we use spacy and the nlp model en_core_web_lg, what we try to do is to split using all the roots in a text.
