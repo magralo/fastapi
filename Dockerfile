@@ -7,13 +7,7 @@ COPY . ./
 RUN pip install fastapi
 RUN pip install gunicorn 
 RUN pip install uvicorn 
-RUN pip install torch
-RUN pip install spacy
-RUN pip install transformers
-RUN pip install pandas
-RUN pip install numpy
-RUN pip install pathlib
-RUN pip install --upgrade google-cloud-storage
+RUN pip install -r requirements.txt
 RUN python -m spacy download en_core_web_lg
 
 

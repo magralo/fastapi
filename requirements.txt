@@ -1,0 +1,6 @@
+torch
+spacy
+transformers
+pandas
+numpy
+pathlib
