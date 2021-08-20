@@ -56,7 +56,7 @@ class SentModel():
                 doc_type = 2 # Talking about two or more asset classes.          
                 for ent in mini_doc.ents:
 
-                    deliver['AssetClass'].append(ent.ent_id_)
+                    #deliver['AssetClass'].append(ent.ent_id_) #para inducir error, comentar
                     deliver['Text'].append(mini_doc.text)
                     deliver['doc_type'].append("2")
                     deliver['Pos'].append(str(sentiment[0]))
