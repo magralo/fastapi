@@ -52,7 +52,7 @@ app = FastAPI()
 
 @app.get('/')
 async def hello_world():
-    return {'hello':'worldhgjnsa'}
+    return {'hello':'world'}
 
 
 @app.post("/analize/")
