@@ -11,7 +11,7 @@ client = TestClient(app)
 def test_readyness():
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {'hello':'worldhgjnsa'}
+    assert response.json() == {'hello':'world'}
 
 
 def test_noAC():
